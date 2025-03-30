@@ -44,7 +44,8 @@ app.post('/order', async (req, res) => {
         const enhancedOrder = {
             ...req.body,
             orderId: uuidv4(),
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            status: 'received'
         };
 
         // Log the request
