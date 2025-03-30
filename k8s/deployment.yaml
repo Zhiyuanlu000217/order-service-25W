@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  labels:
+    app: order-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+      - name: order-service
+        image: zeelu1/order-service:latest
+        ports:
+        - containerPort: 3050
+        env:
+        - name: PORT
+          value: "3050"
+        - name: AZURE_SERVICE_BUS_CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: azure-secrets
+              key: service-bus-connection-string
+        - name: AZURE_SERVICE_BUS_QUEUE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: azure-secrets
+              key: service-bus-queue-name
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m" 
