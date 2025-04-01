@@ -8,11 +8,7 @@ const app = express();
 const port = process.env.PORT || 3050;
 
 // Enable CORS
-app.use(cors({
-  origin: /^http:\/\/localhost(:[0-9]+)?$/,
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors());
 
 // Azure Service Bus configuration
 const connectionString = process.env.AZURE_SERVICE_BUS_CONNECTION_STRING;
