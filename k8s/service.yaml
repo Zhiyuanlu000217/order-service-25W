@@ -9,4 +9,4 @@ spec:
     - protocol: TCP
       port: 3050
       targetPort: 3050
-  type: LoadBalancer 
+  type: ClusterIP 
